@@ -19,10 +19,13 @@ public class Player : MonoBehaviour
 
     private float TimerValue;
 
+    public ParticleSystem particles;
 
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -50,14 +53,17 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Coin"))
         {
+            audioSource.    Play();
             Debug.Log("touch");
             Destroy(collision.gameObject);
             coin += 10 ;
             coinText.GetComponent<Text>().text = "Score: " + coin;
+            particles.Play();
+            
         }
         if (collision.gameObject.CompareTag("Water"))
         {
-            
+            SceneManager.LoadScene("GameLose");
         }
     }
 }
